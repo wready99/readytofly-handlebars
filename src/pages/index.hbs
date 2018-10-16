@@ -1,0 +1,98 @@
+{{#> layouts/base }}
+
+  {{#*inline "header-block"}}
+
+    <!-- Header Carousel -->
+    <header id="myCarousel" class="carousel slide">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="fill" style="background-image:url('images/ampersand-narrow.jpeg');"></div>
+                <!--<div class="carousel-caption">
+                    <h2></h2>
+                </div>-->
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('images/macteal-narrow.jpeg');"></div>
+                <!--<div class="carousel-caption">
+                    <h2></h2>
+                </div>-->
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('images/pink-narrow.jpeg');"></div>
+                <!--<div class="carousel-caption">
+                    <h2></h2>
+                </div>-->
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('images/teal-narrow.jpeg');"></div>
+                <!--<div class="carousel-caption">
+                    <h2></h2>
+                </div>-->
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+    </header>
+  {{/inline}}
+  
+  {{#*inline "container-block"}}
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Marketing Icons Section -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    READY TO FLY COACHING &amp; CONSULTING
+                </h1>
+            <div class="col-md-8" id="quote">
+                <blockquote>&ldquo;People do not decide their futures. They decide their habits, and their habits decide their futures.&rdquo;</blockquote><cite>F.M. Alexander</cite>
+            </div>
+            </div>
+        </div>  
+        <hr>
+        <!-- Features Section -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">What Fiona Provides</h2>
+            </div>
+            <div class="col-md-6">
+                <p id="home-feature">I'm Fiona McKay, transformation coach. My number one goal with my clients is to help them embrace their full potential, in both their personal and professional lives. So many people I come across undervalue themselves&mdash;my commitment in coaching is to shine a light on their greatness and work with them to develop the courage to go after the lifestyle they want, no matter how big their dreams or how different to what society &lsquo;expects&rsquo; of them. I have coached a range of clients in support of their goals in their careers, relationships, work-life balance, confidence building, money and time management. Learn more about my <a href="coaching.html">coaching programs</a> and what I can offer <a href="consulting.html">as a consultant</a>, or more about <a href="about.html">my journey</a>.</p>
+            </div>
+            <div class="col-md-6">
+                <img class="img-responsive" src="images/teal-med.jpg" alt="Fiona McKay Ready">
+            </div>
+        </div>
+        <!-- /.row -->
+        <hr>
+
+        {{> includes/cta }}
+
+    </div>
+  {{/inline}}
+
+  {{#*inline "scripts-block"}}
+    <!-- Script to Activate the Carousel -->
+    <script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+    </script>
+  {{/inline}}
+
+{{/layouts/base}}
