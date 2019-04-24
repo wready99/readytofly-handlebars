@@ -33,7 +33,7 @@ const config = {
   headers: { "Cache-Control": "max-age=315360000, no-transform, public" }
 };
 
-const publisher = awspublish.create(aws);
+const publisher = awspublish.create(config.aws);
 
 function clean() {
     return del(config.dest) && del(config.staging);
@@ -90,7 +90,7 @@ function watch() {
 }
 gulp.task(watch);
 
-function publish() {
+function awspub() {
   return gulp.src(`${config.dest}/**`)
     .pipe(RevAll.revision())
     .pipe(awspublish.gzip())
