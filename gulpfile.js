@@ -9,6 +9,8 @@ const rename = require('gulp-rename');
 const filter = require('gulp-filter');
 const rev = require('gulp-rev');
 const revRewrite = require('gulp-rev-rewrite');
+const awspublish = require('gulp-awspublish');
+const cloudfront = require("gulp-cloudfront");
 
 const config = {
   static: './static',
@@ -20,8 +22,18 @@ const config = {
       match: ['./src/**/*.hbs'],
       tasks: ['html']
     }
-  ]
+  ],
+  aws: {
+    params: {
+        Bucket: "readytoflycoaching"
+    },
+    distributionId: "E3J7TSA09K68FQ",
+    region: "us-west-2"
+  },
+  headers: { "Cache-Control": "max-age=315360000, no-transform, public" }
 };
+
+const publisher = awspublish.create(aws);
 
 function clean() {
     return del(config.dest) && del(config.staging);
@@ -49,7 +61,7 @@ function html() {
 gulp.task(html);
 
 function revision() {
-  const assetFilter = filter(['**/*.html', '!**/index.html', '**/css/*', '**/js/*', '**/images/*'],
+  const assetFilter = filter(['**/*.html', '**/css/*', '**/js/*', '**/images/*'],
     { restore: true });
 
   return gulp.src([`${config.staging}/**`])
@@ -78,5 +90,17 @@ function watch() {
 }
 gulp.task(watch);
 
+function publish() {
+  return gulp.src(`${config.dest}/**`)
+    .pipe(RevAll.revision())
+    .pipe(awspublish.gzip())
+    .pipe(publisher.publish(headers))
+    .pipe(publisher.cache())
+    .pipe(awspublish.reporter())
+    .pipe(cloudfront(aws));
+}
+gulp.task(awspub);
+
+gulp.task('publish', gulp.series(clean, copy, html, revision, awspub));
 gulp.task('serve', gulp.series(clean, copy, html, revision, serve, watch));
 gulp.task('default', gulp.series(clean, copy, html, revision));

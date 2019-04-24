@@ -89,18 +89,28 @@ a {
 h1.page-header {
     font-size:3em;
     text-align: center;
+    margin: 20px 0px;
+
 }
 
-#quote {
-    margin-left:150px;
+.container-block {
+    margin: 20px 0px;
+    font-size: 18px;
 }
+
+.quote {
+    margin: 20px 0px;
+}
+
 blockquote {
-    font-size:1.5em;
+    font-size: 1.4em;
     text-align: center;
+    margin-bottom: 0px;
 }
 
 cite {
     text-align: right;
+    font-size: 1.3em;
 }
 
 .home-feature {
@@ -135,50 +145,11 @@ p, li {
     line-height:1.8em;
 }
 
-/* Home Page Carousel */
-
-header.carousel {
-    height: 50%;
-}
-
-header.carousel .item,
-header.carousel .item.active,
-header.carousel .carousel-inner {
-    height: 100%;
-}
-
-header.carousel .fill {
-    width: 100%;
-    height: 100%;
-    background-position: center;
-    background-size: cover;
-}
-
 /* 404 Page Styles */
 
 .error-404 {
     font-size: 100px;
 }
-
-/* Pricing Page Styles
-
-.price {
-    display: block;
-    font-size: 50px;
-    line-height: 50px;
-}
-
-.price sup {
-    top: -20px;
-    left: 2px;
-    font-size: 20px;
-}
-
-.period {
-    display: block;
-    font-style: italic;
-}
-*/
 
 /* Footer Styles */
 

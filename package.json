@@ -7,6 +7,7 @@
     "start": "gulp serve",
     "build": "gulp",
     "clean": "gulp clean",
+    "publish": "gulp publish",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "William Ready",
@@ -16,6 +17,8 @@
     "browser-sync": "^2.14.0",
     "del": "^2.2.1",
     "gulp": "^4.0.1",
+    "gulp-awspublish": "^4.0.0",
+    "gulp-cloudfront": "0.0.14",
     "gulp-compile-handlebars": "^0.6.1",
     "gulp-filter": "^5.1.0",
     "gulp-rename": "^1.2.2",
