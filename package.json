@@ -4,8 +4,9 @@
   "description": "",
   "scripts": {
     "prestart": "npm install",
-    "start": "gulp --dev",
+    "start": "gulp serve",
     "build": "gulp",
+    "clean": "gulp clean",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "William Ready",
@@ -14,9 +15,12 @@
   "devDependencies": {
     "browser-sync": "^2.14.0",
     "del": "^2.2.1",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.1",
     "gulp-compile-handlebars": "^0.6.1",
+    "gulp-filter": "^5.1.0",
     "gulp-rename": "^1.2.2",
+    "gulp-rev": "^9.0.0",
+    "gulp-rev-rewrite": "^1.1.4",
     "gulp-util": "^3.0.7"
   }
 }

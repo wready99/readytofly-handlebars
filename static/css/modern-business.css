@@ -103,7 +103,7 @@ cite {
     text-align: right;
 }
 
-#home-feature {
+.home-feature {
     font-size:18px;
     line-height: 2em;
 }
