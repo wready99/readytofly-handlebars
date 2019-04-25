@@ -5,6 +5,7 @@ const del = require('del');
 const env = require('gulp-util').env;
 const gulp = require('gulp');
 const handlebars = require('gulp-compile-handlebars');
+const cleanCSS = require('gulp-clean-css');
 const rename = require('gulp-rename');
 const filter = require('gulp-filter');
 const rev = require('gulp-rev');
@@ -28,7 +29,8 @@ const config = {
         Bucket: "readytoflycoaching"
     },
     distributionId: "E3J7TSA09K68FQ",
-    region: "us-west-2"
+    region: "us-west-2",
+    patternIndex: "/^\/index\-[a-f0-9]{10}\.html(\.gz)*$/gi"
   },
   headers: { "Cache-Control": "max-age=315360000, no-transform, public" }
 };
@@ -46,6 +48,13 @@ function copy() {
     }).pipe(gulp.dest(config.staging));
 }
 gulp.task(copy);
+
+function minifyCSS() {
+  return gulp.src(`${config.static}/css/*.css`)
+    .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(gulp.dest(`${config.staging}/css`));
+}
+gulp.task(minifyCSS);
 
 function html() {
   return gulp.src(`${config.src}/pages/*.hbs`)
@@ -92,15 +101,14 @@ gulp.task(watch);
 
 function awspub() {
   return gulp.src(`${config.dest}/**`)
-    .pipe(RevAll.revision())
     .pipe(awspublish.gzip())
-    .pipe(publisher.publish(headers))
+    .pipe(publisher.publish(config.headers))
     .pipe(publisher.cache())
     .pipe(awspublish.reporter())
-    .pipe(cloudfront(aws));
+    .pipe(cloudfront(config.aws));
 }
 gulp.task(awspub);
 
-gulp.task('publish', gulp.series(clean, copy, html, revision, awspub));
-gulp.task('serve', gulp.series(clean, copy, html, revision, serve, watch));
-gulp.task('default', gulp.series(clean, copy, html, revision));
+gulp.task('publish', gulp.series(clean, copy, minifyCSS, html, revision, awspub));
+gulp.task('serve', gulp.series(clean, copy, minifyCSS, html, revision, serve, watch));
+gulp.task('default', gulp.series(clean, copy, minifyCSS, html, revision));
