@@ -7,9 +7,10 @@ const gulp = require('gulp');
 const handlebars = require('gulp-compile-handlebars');
 const cleanCSS = require('gulp-clean-css');
 const rename = require('gulp-rename');
-const filter = require('gulp-filter');
-const rev = require('gulp-rev');
-const revRewrite = require('gulp-rev-rewrite');
+//const filter = require('gulp-filter');
+//const rev = require('gulp-rev');
+//const revRewrite = require('gulp-rev-rewrite');
+const revAll = require("gulp-rev-all");
 const awspublish = require('gulp-awspublish');
 const cloudfront = require("gulp-cloudfront");
 
@@ -30,7 +31,6 @@ const config = {
     },
     distributionId: "E3J7TSA09K68FQ",
     region: "us-west-2",
-    patternIndex: "/^\/index\-[a-f0-9]{10}\.html(\.gz)*$/gi"
   },
   headers: { "Cache-Control": "max-age=315360000, no-transform, public" }
 };
@@ -69,18 +69,24 @@ function html() {
 }
 gulp.task(html);
 
-function revision() {
-  const assetFilter = filter(['**/*.html', '**/css/*', '**/js/*', '**/images/*'],
-    { restore: true });
+//function revision() {
+//  const assetFilter = filter(['**/*.html', '**/css/*', '**/js/*', '**/images/*'],
+//    { restore: true });
+//
+//  return gulp.src([`${config.staging}/**`])
+//    .pipe(assetFilter)
+//    .pipe(rev()) // Rename all files except index.html
+//    .pipe(assetFilter.restore)
+//    .pipe(revRewrite()) // Substitute in new filenames
+//    .pipe(gulp.dest(config.dest));
+//}
+//gulp.task(revision);
 
-  return gulp.src([`${config.staging}/**`])
-    .pipe(assetFilter)
-    .pipe(rev()) // Rename all files except index.html
-    .pipe(assetFilter.restore)
-    .pipe(revRewrite()) // Substitute in new filenames
+function revisionAll() {
+  return gulp.src(`${config.staging}/**`)
+    .pipe(revAll.revision())
     .pipe(gulp.dest(config.dest));
 }
-gulp.task(revision);
 
 function serve() {
   browserSync.init({
@@ -109,6 +115,6 @@ function awspub() {
 }
 gulp.task(awspub);
 
-gulp.task('publish', gulp.series(clean, copy, minifyCSS, html, revision, awspub));
-gulp.task('serve', gulp.series(clean, copy, minifyCSS, html, revision, serve, watch));
-gulp.task('default', gulp.series(clean, copy, minifyCSS, html, revision));
+gulp.task('publish', gulp.series(clean, copy, minifyCSS, html, revisionAll, awspub));
+gulp.task('serve', gulp.series(clean, copy, minifyCSS, html, revisionAll, serve, watch));
+gulp.task('default', gulp.series(clean, copy, minifyCSS, html, revisionAll));
