@@ -121,7 +121,7 @@ cite {
     line-height: 2em;
 }
 
-.well {
+.cta-well {
     font-weight:400;
     color:#8c0006;
     font-family: 'Roboto', sans-serif;
@@ -148,6 +148,64 @@ p, li {
     line-height:1.8em;
 }
 
+ul.pig {
+  list-style: none;
+}
+
+ul.pig li:before {
+    content: '';
+    display: inline-block;
+    height: 25px;
+    width: 35px;
+    background-image: url('../images/red-pig.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: 0px;
+}
+
+.pig-icon {
+  width: 35px;
+  height: 25px;
+}
+
+#carousel-testimonial
+{
+  padding: 0 10px 20px 10px;
+  margin-top: 20px;
+}
+
+/* Control buttons  */
+#carousel-testimonial .carousel-control
+{
+  background: none;
+  color: #222;
+  font-size: 2.3em;
+  text-shadow: none;
+  margin-top: 90px;
+  width: 2%;
+}
+/* Previous button  */
+#carousel-testimonial .carousel-control.left
+{
+    left: 0;
+    margin-left: 0;
+}
+/* Next button  */
+#carousel-testimonial .carousel-control.right
+{
+    right: 0;
+    margin-right: 0;
+}
+
+/* Changes the position of the indicators */
+#carousel-testimonial .carousel-indicators
+{
+  right: 50%;
+  top: auto;
+  bottom: 0px;
+  margin-right: -19px;
+}
+
 /* 404 Page Styles */
 
 .error-404 {
@@ -163,10 +221,44 @@ footer {
 /* Responsive Styles */
 
 @media(max-width:991px) {
-    .customer-img,
-    .img-related {
-        margin-bottom: 30px;
-    }
+  .customer-img,
+  .img-related {
+      margin-bottom: 30px;
+  }
+  .navbar-header {
+      float: none;
+  }
+  .navbar-left,.navbar-right {
+      float: none !important;
+  }
+  .navbar-toggle {
+      display: block;
+  }
+  .navbar-collapse {
+      border-top: 1px solid transparent;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .navbar-fixed-top {
+      top: 0;
+      border-width: 0 0 1px;
+  }
+  .navbar-collapse.collapse {
+      display: none!important;
+  }
+  .navbar-nav {
+      float: none!important;
+      margin-top: 7.5px;
+  }
+  .navbar-nav>li {
+      float: none;
+  }
+  .navbar-nav>li>a {
+      padding-top: 10px;
+      padding-bottom: 10px;
+  }
+  .collapse.in{
+      display:block !important;
+  }
 }
 
 @media(max-width:767px) {
@@ -176,6 +268,11 @@ footer {
     
     .pig-logo {
         padding:5px 5px 0 5px;
+    }
+
+    a.navbar-brand {
+        font-size:16px;
+        padding:25px 8px 15px 8px;
     }
 
     header.carousel .carousel {
